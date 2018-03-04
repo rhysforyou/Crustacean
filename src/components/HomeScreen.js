@@ -1,31 +1,40 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Component responsible for rendering the 'home' screen
+ *
  * @flow
  */
 
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View, Text, FlatList } from 'react-native'
+import { hottestStoriesFixture } from '../api/fixtures'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu'
-})
+import type { StorySummary } from '../api/fixtures'
 
 type Props = {}
+
 export default class HomeScreen extends Component<Props> {
   static navigationOptions = {
     title: 'Home'
   }
 
+  keyExtractor = (item: StorySummary) => item.short_id
+
+  renderItem = ({ item }: { item: StorySummary }) => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.title}>{item.title}</Text>
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <FlatList
+          data={hottestStoriesFixture}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+        />
       </View>
     )
   }
@@ -41,14 +50,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: lightGrayColor
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
+  item: {
+    padding: 8
   },
-  instructions: {
-    textAlign: 'center',
-    color: textColor,
-    marginBottom: 5
+  title: {
+    fontSize: 18,
+    color: textColor
   }
 })
