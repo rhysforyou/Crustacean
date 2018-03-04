@@ -18,6 +18,8 @@ import StorySummary from './StorySummary'
 
 import type { StorySummary as StorySummaryType } from '../api'
 
+const Divider = () => <View style={styles.divider} />
+
 type Props = {
   stories: StorySummaryType[],
   onSelectStory: StorySummaryType => mixed
@@ -36,7 +38,7 @@ export default class HomeScreen extends Component<Props> {
         underlayColor="#EAF4FF"
         onPress={() => this.props.onSelectStory(item)}
       >
-        <View style={styles.item}>
+        <View>
           <StorySummary story={item} />
         </View>
       </Touchable>
@@ -50,6 +52,7 @@ export default class HomeScreen extends Component<Props> {
         data={this.props.stories}
         renderItem={this.renderItem}
         keyExtractor={this.keyExtractor}
+        ItemSeparatorComponent={Divider}
       />
     )
   }
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.select({ ios: 0, android: 8 }),
     paddingBottom: Platform.select({ ios: 44, android: 72 })
   },
-  item: {
+  divider: {
     borderBottomWidth: Platform.select({
       ios: StyleSheet.hairlineWidth,
       android: 0
