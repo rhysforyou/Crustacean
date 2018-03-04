@@ -5,7 +5,8 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, FlatList, Platform, Text } from 'react-native'
+import { StyleSheet, View, FlatList, Platform } from 'react-native'
+import HTML from 'react-native-render-html'
 import { standardNavigationOptions } from '../lib/navigation'
 import { itemDividerColor } from '../lib/colors'
 import StorySummary from './StorySummary'
@@ -41,7 +42,7 @@ export default class StoryScreen extends Component<Props> {
 
   renderItem = ({ item }: { item: Comment }) => (
     <View style={[styles.item, this.indentStyles(item)]}>
-      <Text>{item.comment}</Text>
+      <HTML html={item.comment} />
     </View>
   )
 
