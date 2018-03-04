@@ -34,6 +34,8 @@ export default class StoryScreen extends Component<Props> {
     title: 'Story'
   }
 
+  keyExtractor = (item: Comment) => item.short_id
+
   renderHeader = () => (
     <StorySummary
       story={singleStoryFixture || this.props.navigation.state.params.story}
@@ -62,6 +64,7 @@ export default class StoryScreen extends Component<Props> {
     return (
       <View style={styles.container}>
         <FlatList
+          keyExtractor={this.keyExtractor}
           data={singleStoryFixture.comments || []}
           renderItem={this.renderItem}
           ListHeaderComponent={this.renderHeader}
