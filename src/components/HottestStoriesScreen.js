@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, SafeAreaView } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
 import { hottestStoriesFixture } from '../api/fixtures'
 import StoryFeed from './StoryFeed'
@@ -20,9 +20,9 @@ export default class HottestStoriesScreen extends Component<Props> {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <StoryFeed stories={hottestStoriesFixture} />
-      </SafeAreaView>
+      </View>
     )
   }
 }

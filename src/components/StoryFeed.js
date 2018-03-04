@@ -5,49 +5,20 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, FlatList, Platform, Image } from 'react-native'
+import { StyleSheet, FlatList, Platform } from 'react-native'
+import StorySummary from './StorySummary'
 
-import type { StorySummary } from '../api'
+import type { StorySummary as StorySummaryType } from '../api'
 
 type Props = {
-  stories: StorySummary[]
+  stories: StorySummaryType[]
 }
 
 export default class HomeScreen extends Component<Props> {
-  keyExtractor = (item: StorySummary) => item.short_id
+  keyExtractor = (item: StorySummaryType) => item.short_id
 
-  renderItemTags = (item: StorySummary) =>
-    item.tags != null &&
-    item.tags.length > 0 && (
-      <View style={styles.tagList}>
-        {item.tags.map(tag => (
-          <Text key={tag} style={styles.tag}>
-            {tag}
-          </Text>
-        ))}
-      </View>
-    )
-
-  renderItemMeta = (item: StorySummary) => (
-    <View style={styles.meta}>
-      <Image
-        style={styles.avatar}
-        source={{ uri: item.submitter_user.avatar_url }}
-      />
-      <Text style={styles.author}>
-        authored by {item.submitter_user.username}
-      </Text>
-    </View>
-  )
-
-  renderItem = ({ item }: { item: StorySummary }) => {
-    return (
-      <View style={styles.item}>
-        <Text style={styles.title}>{item.title}</Text>
-        {this.renderItemTags(item)}
-        {this.renderItemMeta(item)}
-      </View>
-    )
+  renderItem = ({ item }: { item: StorySummaryType }) => {
+    return <StorySummary story={item} style={styles.item} />
   }
 
   render() {
@@ -62,61 +33,18 @@ export default class HomeScreen extends Component<Props> {
   }
 }
 
-const itemDividerColor = '#999'
-const textColor = '#333'
-const tagTextColor = '#555'
-const tagBackgroundColor = '#fffcd7'
-const tagBorderColor = '#d5d458'
-const metaColor = '#888'
+const itemDividerColor = '#DEDEE1'
 
 const styles = StyleSheet.create({
   list: {
-    paddingTop: Platform.select({ ios: 0, android: 16 })
+    paddingTop: Platform.select({ ios: 0, android: 8 }),
+    paddingBottom: Platform.select({ ios: 44, android: 72 })
   },
   item: {
-    paddingHorizontal: Platform.select({ ios: 8, android: 16 }),
-    paddingVertical: 8,
-    flex: 1,
-    flexDirection: 'column',
     borderBottomWidth: Platform.select({
       ios: StyleSheet.hairlineWidth,
       android: 0
     }),
     borderBottomColor: itemDividerColor
-  },
-  title: {
-    fontSize: 18,
-    color: textColor
-  },
-  tagList: {
-    flex: 1,
-    flexDirection: 'row',
-    paddingTop: 4
-  },
-  tag: {
-    paddingHorizontal: 4,
-    paddingVertical: 1,
-    marginEnd: 8,
-    backgroundColor: tagBackgroundColor,
-    color: tagTextColor,
-    fontSize: 14,
-    borderRadius: 3,
-    borderColor: tagBorderColor,
-    borderWidth: 1
-  },
-  meta: {
-    flex: 1,
-    flexDirection: 'row',
-    paddingTop: 8
-  },
-  avatar: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    marginRight: 4
-  },
-  author: {
-    fontSize: 14,
-    color: metaColor
   }
 })
