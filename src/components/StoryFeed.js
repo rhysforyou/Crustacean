@@ -61,7 +61,8 @@ export default class HomeScreen extends Component<Props> {
 const styles = StyleSheet.create({
   list: {
     paddingTop: Platform.select({ ios: 0, android: 8 }),
-    paddingBottom: Platform.select({ ios: 44, android: 72 })
+    paddingBottom: Platform.select({ ios: 44, android: 72 }),
+    alignSelf: 'stretch'
   },
   divider: {
     borderBottomWidth: Platform.select({
