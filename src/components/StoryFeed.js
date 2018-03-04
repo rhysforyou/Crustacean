@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, FlatList, Platform } from 'react-native'
+import { StyleSheet, View, Text, FlatList, Platform, Image } from 'react-native'
 
 import type { StorySummary } from '../api'
 
@@ -30,6 +30,10 @@ export default class HomeScreen extends Component<Props> {
 
   renderItemMeta = (item: StorySummary) => (
     <View style={styles.meta}>
+      <Image
+        style={styles.avatar}
+        source={{ uri: item.submitter_user.avatar_url }}
+      />
       <Text style={styles.author}>
         authored by {item.submitter_user.username}
       </Text>
@@ -104,6 +108,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingTop: 8
+  },
+  avatar: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    marginRight: 4
   },
   author: {
     fontSize: 14,
