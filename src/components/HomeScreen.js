@@ -31,7 +31,7 @@ export default class HomeScreen extends Component<Props> {
   }
 }
 
-const lightGreyColor = '#F5FCFF'
+const lightGrayColor = '#F5FCFF'
 const textColor = '#333'
 
 const styles = StyleSheet.create({
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: lightGreyColor
+    backgroundColor: lightGrayColor
   },
   welcome: {
     fontSize: 20,
