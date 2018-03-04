@@ -1,9 +1,9 @@
 // @flow
 import { StackNavigator } from 'react-navigation'
-import HomeScreen from './HomeScreen'
+import HottestStoriesScreen from './HottestStoriesScreen'
 
 export default StackNavigator({
-  Home: {
-    screen: HomeScreen
+  Hottest: {
+    screen: HottestStoriesScreen
   }
 })
