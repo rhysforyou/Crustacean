@@ -31,12 +31,15 @@ export default class HomeScreen extends Component<Props> {
   }
 }
 
+const lightGreyColor = '#F5FCFF'
+const textColor = '#333'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: lightGreyColor
   },
   welcome: {
     fontSize: 20,
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: textColor,
     marginBottom: 5
   }
 })
