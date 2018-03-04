@@ -11,5 +11,10 @@ export const standardNavigationOptions = {
     ...Platform.select({
       android: { color: 'white' }
     })
+  },
+  headerBackTitleStyle: {
+    ...Platform.select({
+      android: { color: 'white' }
+    })
   }
 }

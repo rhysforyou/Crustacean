@@ -5,20 +5,41 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, FlatList, Platform } from 'react-native'
+import {
+  StyleSheet,
+  FlatList,
+  Platform,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  View
+} from 'react-native'
 import StorySummary from './StorySummary'
 
 import type { StorySummary as StorySummaryType } from '../api'
 
 type Props = {
-  stories: StorySummaryType[]
+  stories: StorySummaryType[],
+  onSelectStory: StorySummaryType => mixed
 }
 
 export default class HomeScreen extends Component<Props> {
   keyExtractor = (item: StorySummaryType) => item.short_id
 
   renderItem = ({ item }: { item: StorySummaryType }) => {
-    return <StorySummary story={item} style={styles.item} />
+    const Touchable = Platform.select({
+      ios: TouchableHighlight,
+      android: TouchableNativeFeedback
+    })
+    return (
+      <Touchable
+        underlayColor="#EAF4FF"
+        onPress={() => this.props.onSelectStory(item)}
+      >
+        <View>
+          <StorySummary story={item} style={styles.item} />
+        </View>
+      </Touchable>
+    )
   }
 
   render() {
