@@ -13,6 +13,7 @@ import {
   TouchableNativeFeedback,
   View
 } from 'react-native'
+import { itemDividerColor } from '../lib/colors'
 import StorySummary from './StorySummary'
 
 import type { StorySummary as StorySummaryType } from '../api'
@@ -35,8 +36,8 @@ export default class HomeScreen extends Component<Props> {
         underlayColor="#EAF4FF"
         onPress={() => this.props.onSelectStory(item)}
       >
-        <View>
-          <StorySummary story={item} style={styles.item} />
+        <View style={styles.item}>
+          <StorySummary story={item} />
         </View>
       </Touchable>
     )
@@ -53,8 +54,6 @@ export default class HomeScreen extends Component<Props> {
     )
   }
 }
-
-const itemDividerColor = '#DEDEE1'
 
 const styles = StyleSheet.create({
   list: {

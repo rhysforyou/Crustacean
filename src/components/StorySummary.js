@@ -6,6 +6,13 @@
 
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Platform, Image } from 'react-native'
+import {
+  textColor,
+  tagTextColor,
+  tagBackgroundColor,
+  tagBorderColor,
+  metaColor
+} from '../lib/colors'
 
 import type { StorySummary as StorySummaryType } from '../api'
 
@@ -48,12 +55,6 @@ export default class StorySummary extends Component<Props> {
     )
   }
 }
-
-const textColor = '#333'
-const tagTextColor = '#555'
-const tagBackgroundColor = '#fffcd7'
-const tagBorderColor = '#d5d458'
-const metaColor = '#888'
 
 const styles = StyleSheet.create({
   container: {

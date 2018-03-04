@@ -19,15 +19,9 @@ type NavigationState = {
 type Props = {} & NavigationNavigatorProps<{}, NavigationState>
 
 export default class StoryScreen extends Component<Props> {
-  static navigationOptions = ({
-    navigation
-  }: NavigationNavigatorProps<{}, NavigationState>) => {
-    const { params } = navigation.state
-
-    return {
-      ...standardNavigationOptions,
-      title: params ? params.id : 'A Nested Details Screen'
-    }
+  static navigationOptions = {
+    ...standardNavigationOptions,
+    title: 'Story'
   }
 
   render() {

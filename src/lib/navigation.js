@@ -9,12 +9,17 @@ export const standardNavigationOptions = {
   },
   headerTitleStyle: {
     ...Platform.select({
-      android: { color: 'white' }
+      android: { color: 'white' },
+      ios: { color: 'black' }
     })
   },
   headerBackTitleStyle: {
     ...Platform.select({
       android: { color: 'white' }
     })
-  }
+  },
+  headerTintColor: Platform.select({
+    ios: '#E53935',
+    android: 'white'
+  })
 }
