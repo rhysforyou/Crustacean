@@ -5,7 +5,8 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
+import { standardNavigationOptions } from '../lib/navigation'
 import { hottestStoriesFixture } from '../api/fixtures'
 import StoryFeed from './StoryFeed'
 
@@ -13,14 +14,15 @@ type Props = {}
 
 export default class HottestStoriesScreen extends Component<Props> {
   static navigationOptions = {
+    ...standardNavigationOptions,
     title: 'Hottest'
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <StoryFeed stories={hottestStoriesFixture} />
-      </View>
+      </SafeAreaView>
     )
   }
 }
