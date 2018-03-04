@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
       ios: StyleSheet.hairlineWidth,
       android: 0
     }),
-    borderBottomColor: itemDividerColor
+    borderBottomColor: itemDividerColor,
+    marginLeft: 8
   }
 })

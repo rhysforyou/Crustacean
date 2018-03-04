@@ -5,14 +5,23 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, FlatList, Platform, Text } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
+import { itemDividerColor } from '../lib/colors'
+import StorySummary from './StorySummary'
+import { singleStoryFixture } from '../api/fixtures'
 
 import type { NavigationNavigatorProps } from 'react-navigation'
+import type { StorySummary as StorySummaryType, Comment } from '../api'
+
+const Divider = () => <View style={styles.divider} />
+
+const baseHorizontalPadding = Platform.select({ android: 16, ios: 8 })
 
 type NavigationState = {
   params: {
-    id: string
+    id: string,
+    story: StorySummaryType
   }
 }
 
@@ -24,10 +33,40 @@ export default class StoryScreen extends Component<Props> {
     title: 'Story'
   }
 
+  renderHeader = () => (
+    <StorySummary
+      story={singleStoryFixture || this.props.navigation.state.params.story}
+    />
+  )
+
+  renderItem = ({ item }: { item: Comment }) => (
+    <View style={[styles.item, this.indentStyles(item)]}>
+      <Text>{item.comment}</Text>
+    </View>
+  )
+
+  indentStyles(comment: Comment) {
+    if (comment.indent_level === 1) {
+      return null
+    } else {
+      return {
+        marginLeft: 8 * (comment.indent_level - 1),
+        borderLeftWidth: 2,
+        borderLeftColor: itemDividerColor
+      }
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.props.navigation.state.params.id}</Text>
+        <FlatList
+          data={singleStoryFixture.comments || []}
+          renderItem={this.renderItem}
+          ListHeaderComponent={this.renderHeader}
+          ItemSeparatorComponent={Divider}
+          style={styles.list}
+        />
       </View>
     )
   }
@@ -38,5 +77,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  list: {
+    alignSelf: 'stretch',
+    paddingTop: Platform.select({ ios: 0, android: 8 })
+  },
+  item: {
+    marginVertical: 8,
+    paddingHorizontal: baseHorizontalPadding
+  },
+  divider: {
+    borderBottomWidth: Platform.select({
+      ios: StyleSheet.hairlineWidth,
+      android: 0
+    }),
+    borderBottomColor: itemDividerColor,
+    marginLeft: 8
   }
 })

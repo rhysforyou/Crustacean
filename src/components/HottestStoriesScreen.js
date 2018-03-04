@@ -24,7 +24,10 @@ export default class HottestStoriesScreen extends Component<Props> {
   }
 
   handleSelectStory = (story: StorySummary) => {
-    this.props.navigation.navigate('Story', { id: story.short_id })
+    this.props.navigation.navigate('Story', {
+      id: story.short_id,
+      story: story
+    })
   }
 
   render() {

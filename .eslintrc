@@ -28,3 +28,4 @@ rules:
       - warn
       - error
       - info
+  react/prop-types: off

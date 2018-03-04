@@ -9,6 +9,21 @@ export type UserProfile = {
   avatar_url: string
 }
 
+export type Comment = {
+  short_id: string,
+  short_id_url: string,
+  created_at: string,
+  updated_at: string,
+  is_deleted: boolean,
+  is_moderated: boolean,
+  score: number,
+  upvotes: number,
+  downvotes: number,
+  comment: string,
+  indent_level: number,
+  commenting_user: UserProfile
+}
+
 export type StorySummary = {
   short_id: string,
   short_id_url: string,
@@ -23,6 +38,23 @@ export type StorySummary = {
   comments_url: string,
   submitter_user: UserProfile,
   tags: string[]
+}
+
+export type Story = {
+  short_id: string,
+  short_id_url: string,
+  created_at: string,
+  title: string,
+  url: string,
+  score: number,
+  upvotes: number,
+  downvotes: number,
+  comment_count: number,
+  description: string,
+  comments_url: string,
+  submitter_user: UserProfile,
+  tags: string[],
+  comments: Comment[]
 }
 
 export const hottestStoriesFixture: StorySummary[] = [
@@ -656,3 +688,346 @@ export const hottestStoriesFixture: StorySummary[] = [
     tags: ['distributed', 'video']
   }
 ]
+
+export const singleStoryFixture: Story = {
+  short_id: 'cgqz3p',
+  short_id_url: 'https://lobste.rs/s/cgqz3p',
+  created_at: '2018-03-03T18:03:38.000-06:00',
+  title: 'Do we need to move away from Elm?',
+  url:
+    'https://www.reddit.com/r/elm/comments/81bo14/do_we_need_to_move_away_from_elm/',
+  score: 12,
+  upvotes: 13,
+  downvotes: 1,
+  comment_count: 13,
+  description: '',
+  comments_url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm',
+  submitter_user: {
+    username: 'zpojqwfejwfhiunz',
+    created_at: '2017-10-02T13:57:42.000-05:00',
+    is_admin: false,
+    about: '',
+    is_moderator: false,
+    karma: 551,
+    avatar_url: 'https://lobste.rs/avatars/zpojqwfejwfhiunz-100.png'
+  },
+  tags: ['elm'],
+  comments: [
+    {
+      short_id: '1wdmon',
+      short_id_url: 'https://lobste.rs/c/1wdmon',
+      created_at: '2018-03-03T18:20:32.000-06:00',
+      updated_at: '2018-03-03T18:22:09.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 19,
+      upvotes: 19,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eThe tl;dr for those unfamiliar with the situation:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eIn Elm, there is no FFI. Instead, you can communicate with Javascript through the use of a pub/sub system similar to making requests to an external server, known as ports.\u003c/li\u003e\n\u003cli\u003eThe user in question was using an intentionally undocumented underyling system to write JS code that isn’t type-checked\u003c/li\u003e\n\u003cli\u003eIn the next release of 0.19, the way this system works is changed, and restricted further. This leads user to be concerned about their continued use of Elm\u003c/li\u003e\n\u003c/ul\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_1wdmon',
+      indent_level: 1,
+      commenting_user: {
+        username: 'eeue56',
+        created_at: '2016-10-30T11:07:08.000-05:00',
+        is_admin: false,
+        about: "Work at Schibsted. solving everyone's problems with Elm",
+        is_moderator: false,
+        karma: 337,
+        avatar_url: 'https://lobste.rs/avatars/eeue56-100.png'
+      }
+    },
+    {
+      short_id: 'zfucxt',
+      short_id_url: 'https://lobste.rs/c/zfucxt',
+      created_at: '2018-03-03T18:33:20.000-06:00',
+      updated_at: '2018-03-03T18:33:20.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 3,
+      upvotes: 3,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eMayve it’s just not clear to me, but is there an actual problem here, or just “I can’t do it exactly how I want to so I’m going to stomp my feet and threaten to leave”?\u003c/p\u003e\n\u003cp\u003eDoes the OP want something that would circumvent all of the static benefits of using Elm? Is the message passing system inadequate?\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_zfucxt',
+      indent_level: 2,
+      commenting_user: {
+        username: 'jshumway',
+        created_at: '2014-10-28T20:39:31.000-05:00',
+        is_admin: false,
+        about: '',
+        is_moderator: false,
+        karma: 435,
+        avatar_url: 'https://lobste.rs/avatars/jshumway-100.png'
+      }
+    },
+    {
+      short_id: 'rrka0t',
+      short_id_url: 'https://lobste.rs/c/rrka0t',
+      created_at: '2018-03-03T18:39:05.000-06:00',
+      updated_at: '2018-03-03T18:39:52.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 10,
+      upvotes: 10,
+      downvotes: 0,
+      comment:
+        '\u003cblockquote\u003e\n\u003cp\u003eis there an actual problem here\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eI believe the actual problem is a communication problem: the user has read some bit and pieces, and started to be concerned about the way they are currently using Elm might not work going forward. That’s a very legitimate concern to have! However, based on what they said, their problem is actually completely solvable right now in Elm \u003cem\u003ewithout\u003c/em\u003e the method they used to bypass Elm’s safety, via ports. Also, the undocumented API they used (“Native” code) led to this situation.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eDoes the OP want something that would circumvent all of the static benefits of using Elm?\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eMy understanding is yes, that’s what they want: but in standard XY problem fashion, the real concern they have is becoming blocked by upstream bug fixes not being merged as often as they’d like. This is something we’re actively looking into improving in Elm going forward.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eIs the message passing system inadequate?\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eThere are some aspects of it which are inadequate, for sure. Ports require that all the code that use them be async in both Elm and JS. This can be a problem if you need sync code in your view function, for example. However, that’s entirely possible to work around.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_rrka0t',
+      indent_level: 3,
+      commenting_user: {
+        username: 'eeue56',
+        created_at: '2016-10-30T11:07:08.000-05:00',
+        is_admin: false,
+        about: "Work at Schibsted. solving everyone's problems with Elm",
+        is_moderator: false,
+        karma: 337,
+        avatar_url: 'https://lobste.rs/avatars/eeue56-100.png'
+      }
+    },
+    {
+      short_id: '6naujh',
+      short_id_url: 'https://lobste.rs/c/6naujh',
+      created_at: '2018-03-03T22:01:34.000-06:00',
+      updated_at: '2018-03-03T22:01:34.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 9,
+      upvotes: 9,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eLast I checked the creator of Elm literally did not allow any libraries to be published to the central repository without his personal approval if they used the JS interop system.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_6naujh',
+      indent_level: 3,
+      commenting_user: {
+        username: 'technomancy',
+        created_at: '2014-03-02T12:11:55.000-06:00',
+        is_admin: false,
+        about:
+          '[Hacker Errant](http://technomancy.us/colophon).\r\n\r\n* Emacs\r\n* [Functional programming](https://leiningen.org)\r\n* [Purveyor of custom keyboards](https://atreus.technomancy.us)\r\n* [Spaceflight programming adventure game](https://technomancy.itch.io/bussard)\r\n* Posting on [Mastodon](https://icosahedron.website/@technomancy)/Fediverse',
+        is_moderator: false,
+        karma: 1760,
+        avatar_url: 'https://lobste.rs/avatars/technomancy-100.png'
+      }
+    },
+    {
+      short_id: 'ixxsvp',
+      short_id_url: 'https://lobste.rs/c/ixxsvp',
+      created_at: '2018-03-04T01:53:07.000-06:00',
+      updated_at: '2018-03-04T01:53:07.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 4,
+      upvotes: 4,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eWhile technically true, this doesn’t really paint the whole picture.\u003c/p\u003e\n\u003cp\u003eYou can publish any Elm part of a package that uses ports. What you can’t do is publish the ports exposed themselves. There’s a good reason for that: to avoid name collisions on ports. So, what you do is:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ePublish the Elm parts as a package.\u003c/li\u003e\n\u003cli\u003ePublish the JS parts as a package.\u003c/li\u003e\n\u003cli\u003eInstruct on how to connect the two.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eIt’s straight-forward to do things in this manner.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_ixxsvp',
+      indent_level: 4,
+      commenting_user: {
+        username: 'eeue56',
+        created_at: '2016-10-30T11:07:08.000-05:00',
+        is_admin: false,
+        about: "Work at Schibsted. solving everyone's problems with Elm",
+        is_moderator: false,
+        karma: 337,
+        avatar_url: 'https://lobste.rs/avatars/eeue56-100.png'
+      }
+    },
+    {
+      short_id: 'lxmfou',
+      short_id_url: 'https://lobste.rs/c/lxmfou',
+      created_at: '2018-03-04T10:26:17.000-06:00',
+      updated_at: '2018-03-04T10:26:17.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 2,
+      upvotes: 2,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eThanks for the context. While I still think it’s problematic from a social perspective to have a benevolent dictator who acts as a personal gatekeeper for what is and isn’t allowed to be published, from a technical perspective it doesn’t seem so bad.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_lxmfou',
+      indent_level: 5,
+      commenting_user: {
+        username: 'technomancy',
+        created_at: '2014-03-02T12:11:55.000-06:00',
+        is_admin: false,
+        about:
+          '[Hacker Errant](http://technomancy.us/colophon).\r\n\r\n* Emacs\r\n* [Functional programming](https://leiningen.org)\r\n* [Purveyor of custom keyboards](https://atreus.technomancy.us)\r\n* [Spaceflight programming adventure game](https://technomancy.itch.io/bussard)\r\n* Posting on [Mastodon](https://icosahedron.website/@technomancy)/Fediverse',
+        is_moderator: false,
+        karma: 1760,
+        avatar_url: 'https://lobste.rs/avatars/technomancy-100.png'
+      }
+    },
+    {
+      short_id: '8kd0kr',
+      short_id_url: 'https://lobste.rs/c/8kd0kr',
+      created_at: '2018-03-04T01:53:35.000-06:00',
+      updated_at: '2018-03-04T01:55:02.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 5,
+      upvotes: 5,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eThe message passing system is absolutely inadequate for some things (e.g., for replacing Math library functions, or for, as in this case, replacing the native websocket module). These can not be implemented async, and therefore not with ports.\u003c/p\u003e\n\u003cp\u003eSee this quote from the author:\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eWe also have some synchronous functions JS functions that we need to call that we will not rewrite in Elm. Sorry but we can’t upgrade to the official 0.19.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eFor these things, you need to use JS to do it yourself, and in the latest version, there’s a whitelist restricting which people can create such JS modules. This whitelist is restricted to the elm team.\u003c/p\u003e\n\u003cp\u003eAs result, people are considering forking the compiler, or moving away entirely.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_8kd0kr',
+      indent_level: 3,
+      commenting_user: {
+        username: 'justJanne',
+        created_at: '2018-02-08T18:56:23.000-06:00',
+        is_admin: false,
+        about: '',
+        is_moderator: false,
+        karma: 23,
+        avatar_url: 'https://lobste.rs/avatars/justJanne-100.png'
+      }
+    },
+    {
+      short_id: 'celig5',
+      short_id_url: 'https://lobste.rs/c/celig5',
+      created_at: '2018-03-04T01:59:20.000-06:00',
+      updated_at: '2018-03-04T01:59:20.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 2,
+      upvotes: 2,
+      downvotes: 0,
+      comment:
+        '\u003cblockquote\u003e\n\u003cp\u003e, replacing the native websocket module\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eThis is not accurate: ports are perfect for replacing the websocket module. The reason why the original poster mentioned websockets is because they wanted to patch the library themselves. However, using ports instead would’ve worked just fine. That’s how the existing library is modelled, after all.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_celig5',
+      indent_level: 4,
+      commenting_user: {
+        username: 'eeue56',
+        created_at: '2016-10-30T11:07:08.000-05:00',
+        is_admin: false,
+        about: "Work at Schibsted. solving everyone's problems with Elm",
+        is_moderator: false,
+        karma: 337,
+        avatar_url: 'https://lobste.rs/avatars/eeue56-100.png'
+      }
+    },
+    {
+      short_id: 'rh5as5',
+      short_id_url: 'https://lobste.rs/c/rh5as5',
+      created_at: '2018-03-04T13:06:30.000-06:00',
+      updated_at: '2018-03-04T13:09:40.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 4,
+      upvotes: 4,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eHere is the exact reason the user expressed as to why they’ll have to use a fork of either Elm or rewrite the extension they rely on:\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eOur production application relies on a fork of elm-lang/websocket which has some features and bugfixes that haven’t been merged into core yet for almost two years (\u003ca href="https://github.com/elm-lang/websocket/pull/12" rel="nofollow"\u003ehttps://github.com/elm-lang/websocket/pull/12\u003c/a\u003e, \u003ca href="https://github.com/elm-lang/websocket/pull/18" rel="nofollow"\u003ehttps://github.com/elm-lang/websocket/pull/18\u003c/a\u003e, \u003ca href="https://github.com/elm-lang/websocket/pull/19" rel="nofollow"\u003ehttps://github.com/elm-lang/websocket/pull/19\u003c/a\u003e).\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003eIf what I’ve read is correct, we won’t be able to switch to Elm 0.19 until Evan decides to merge those changes, which might take years judging from the fact that there has been no official reply to any PRs of that package that have been open since 2 years (\u003ca href="https://github.com/elm-lang/websocket/pull/12" rel="nofollow"\u003ehttps://github.com/elm-lang/websocket/pull/12\u003c/a\u003e).\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eIt’s basically out of their hands as a user who didn’t create and doesn’t maintain the extension that their production app came to rely on so they’re already using a fork. That situation was not ideal but they had an easy path forward with the fork. They are now worried that that easy path forward has come to a dead end because the original package doesn’t seem to be maintained well enough for them to think that this will be remedied soon and they will have to do a lot of work, one way or another, to upgrade Elm ≥ 0.19. It might be an amount of work that their team will just port the app to something else entirely.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_rh5as5',
+      indent_level: 3,
+      commenting_user: {
+        username: 'zpojqwfejwfhiunz',
+        created_at: '2017-10-02T13:57:42.000-05:00',
+        is_admin: false,
+        about: '',
+        is_moderator: false,
+        karma: 551,
+        avatar_url: 'https://lobste.rs/avatars/zpojqwfejwfhiunz-100.png'
+      }
+    },
+    {
+      short_id: '9khyew',
+      short_id_url: 'https://lobste.rs/c/9khyew',
+      created_at: '2018-03-04T03:05:19.000-06:00',
+      updated_at: '2018-03-04T03:05:19.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 4,
+      upvotes: 4,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eAfter looking for pro/cons in Elm and ReamsonML, my final point was that although Elm has a great pattern and offer simplicity, the interop with JS to import any external library is not fitting the need that I have.\u003c/p\u003e\n\u003cp\u003eIf I ever need to write apps without JS interoperability, then elm would be great, but for now, the ecosystem not here yet.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_9khyew',
+      indent_level: 1,
+      commenting_user: {
+        username: 'jstoja',
+        created_at: '2017-05-08T14:59:02.000-05:00',
+        is_admin: false,
+        about: 'I write code for living.',
+        is_moderator: false,
+        karma: 328,
+        avatar_url: 'https://lobste.rs/avatars/jstoja-100.png'
+      }
+    },
+    {
+      short_id: 'gkevtu',
+      short_id_url: 'https://lobste.rs/c/gkevtu',
+      created_at: '2018-03-04T06:55:09.000-06:00',
+      updated_at: '2018-03-04T06:55:09.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 4,
+      upvotes: 4,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eI find this odd given that Elm targets browsers. It’s a bit like creating a native language and say: we don’t need C FFI, people can use named pipes.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_gkevtu',
+      indent_level: 2,
+      commenting_user: {
+        username: 'sebastien',
+        created_at: '2016-03-29T10:31:33.000-05:00',
+        is_admin: false,
+        about:
+          'Interested in programming languages, data visualization, computer graphics and any kind of digital activism. I run FFunction, a dataviz studio by day.',
+        is_moderator: false,
+        karma: 311,
+        avatar_url: 'https://lobste.rs/avatars/sebastien-100.png',
+        github_username: 'sebastien'
+      }
+    },
+    {
+      short_id: 'uwxphi',
+      short_id_url: 'https://lobste.rs/c/uwxphi',
+      created_at: '2018-03-04T07:14:16.000-06:00',
+      updated_at: '2018-03-04T07:14:16.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 5,
+      upvotes: 5,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eIt’s not really that odd, when it fits into the Elm model of the world: I suggest listening to this podcast, which goes over why things in Elm are the way they are: \u003ca href="https://elmtown.audio/99e18f41" rel="nofollow"\u003ehttps://elmtown.audio/99e18f41\u003c/a\u003e\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_uwxphi',
+      indent_level: 3,
+      commenting_user: {
+        username: 'eeue56',
+        created_at: '2016-10-30T11:07:08.000-05:00',
+        is_admin: false,
+        about: "Work at Schibsted. solving everyone's problems with Elm",
+        is_moderator: false,
+        karma: 337,
+        avatar_url: 'https://lobste.rs/avatars/eeue56-100.png'
+      }
+    },
+    {
+      short_id: 'dgbabk',
+      short_id_url: 'https://lobste.rs/c/dgbabk',
+      created_at: '2018-03-04T09:55:12.000-06:00',
+      updated_at: '2018-03-04T09:55:12.000-06:00',
+      is_deleted: false,
+      is_moderated: false,
+      score: 5,
+      upvotes: 5,
+      downvotes: 0,
+      comment:
+        '\u003cp\u003eI think the vision put forth by Evan sounds like a great thing to strive for. However, as he says, these things are going to take years to happen.\u003c/p\u003e\n\u003cp\u003eI think we are seeing the tension between building out this grand vision were everything has an ideal interface, and people using it to ship features today. It seems that recently, there has been more and more negative chatter about the limitations and issues of the language around this tension.\u003c/p\u003e\n\u003cp\u003eNot having small patches to fix things like the issue mentioned in the linked post is probably one of larger concerns. Users of the language can make a hotfix and push it to prod in minutes, but issues in language aren’t patched for a year. I know these aren’t the same thing, and actually doing things are never as easy as they sound, but this seems to be where the creator and user are at odds.\u003c/p\u003e\n',
+      url: 'https://lobste.rs/s/cgqz3p/do_we_need_move_away_from_elm#c_dgbabk',
+      indent_level: 4,
+      commenting_user: {
+        username: 'ZachDevelop',
+        created_at: '2015-08-21T11:46:58.000-05:00',
+        is_admin: false,
+        about: '',
+        is_moderator: false,
+        karma: 4,
+        avatar_url: 'https://lobste.rs/avatars/ZachDevelop-100.png'
+      }
+    }
+  ]
+}
