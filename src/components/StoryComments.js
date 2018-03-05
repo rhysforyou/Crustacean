@@ -4,7 +4,6 @@ import { StyleSheet, View, FlatList, Platform } from 'react-native'
 import HTML from 'react-native-render-html'
 import { itemDividerColor } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
-import { singleStoryFixture } from '../api/fixtures'
 
 import type { ComponentType } from 'react'
 import type { Comment } from '../api'
@@ -44,7 +43,7 @@ export default class StoryScreen extends Component<Props> {
       <View style={styles.container}>
         <FlatList
           keyExtractor={this.keyExtractor}
-          data={singleStoryFixture.comments || []}
+          data={this.props.comments}
           renderItem={this.renderItem}
           ListHeaderComponent={this.props.header}
           ItemSeparatorComponent={Divider}

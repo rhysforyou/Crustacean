@@ -10,3 +10,7 @@ export function fetchHottestStories(): Promise<any> {
 export function fetchNewestStories(): Promise<any> {
   return fetch(`${API_BASE}/newest.json`).then(res => res.json())
 }
+
+export function fetchStory(id: string): Promise<any> {
+  return fetch(`${API_BASE}/s/${id}.json`).then(res => res.json())
+}
