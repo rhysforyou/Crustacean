@@ -17,6 +17,7 @@ import {
 import HTML from 'react-native-render-html'
 import { standardNavigationOptions } from '../lib/navigation'
 import { itemDividerColor } from '../lib/colors'
+import { maxContentWidth } from '../lib/metrics'
 import StorySummary from './StorySummary'
 import { singleStoryFixture } from '../api/fixtures'
 import shareIcon from '../../assets/icons/ic_share.png'
@@ -85,7 +86,7 @@ export default class StoryScreen extends Component<Props> {
       return null
     } else {
       return {
-        marginLeft: 8 * (comment.indent_level - 1),
+        marginStart: 8 * (comment.indent_level - 1),
         borderLeftWidth: 2,
         borderLeftColor: itemDividerColor
       }
@@ -120,7 +121,10 @@ const styles = StyleSheet.create({
   },
   item: {
     marginVertical: 8,
-    paddingHorizontal: baseHorizontalPadding
+    paddingHorizontal: baseHorizontalPadding,
+    maxWidth: maxContentWidth,
+    width: '100%',
+    alignSelf: 'center'
   },
   divider: {
     borderBottomWidth: Platform.select({

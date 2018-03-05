@@ -70,6 +70,6 @@ const styles = StyleSheet.create({
       android: 0
     }),
     borderBottomColor: itemDividerColor,
-    marginLeft: 8
+    marginStart: 8
   }
 })

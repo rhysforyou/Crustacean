@@ -13,6 +13,7 @@ import {
   tagBorderColor,
   metaColor
 } from '../lib/colors'
+import { maxContentWidth } from '../lib/metrics'
 
 import type { StorySummary as StorySummaryType } from '../api'
 
@@ -61,7 +62,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Platform.select({ ios: 8, android: 16 }),
     paddingVertical: 8,
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    maxWidth: maxContentWidth,
+    width: '100%',
+    alignSelf: 'center'
   },
   title: {
     fontSize: 17,
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
-    marginRight: 4
+    marginEnd: 4
   },
   author: {
     fontSize: 14,
