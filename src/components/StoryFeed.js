@@ -12,7 +12,8 @@ import {
   TouchableHighlight,
   TouchableNativeFeedback,
   View,
-  Text
+  Text,
+  ActivityIndicator
 } from 'react-native'
 import { itemDividerColor, itemHighlightColor } from '../lib/colors'
 import StorySummary from './StorySummary'
@@ -48,11 +49,16 @@ export default class HomeScreen extends Component<Props> {
     )
   }
 
-  renderEmpty = () => (
-    <View style={styles.placeholderContainer}>
-      <Text style={styles.placeholderText}>No Stories</Text>
-    </View>
-  )
+  renderEmpty = () =>
+    this.props.isLoading ? (
+      <View style={styles.placeholderContainer}>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
+      <View style={styles.placeholderContainer}>
+        <Text style={styles.placeholderText}>No Stories</Text>
+      </View>
+    )
 
   render() {
     const { stories, isLoading, onRefresh } = this.props
