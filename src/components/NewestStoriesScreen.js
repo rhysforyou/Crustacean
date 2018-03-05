@@ -24,10 +24,14 @@ type State = {
 }
 
 export default class NewestStoriesScreen extends Component<Props, State> {
-  static navigationOptions = {
-    ...standardNavigationOptions,
-    title: 'Recent'
-  }
+  static navigationOptions = ({
+    navigation
+  }: NavigationNavigatorProps<{}, NavigationState>) => ({
+    ...standardNavigationOptions(() => {
+      navigation.navigate('DrawerOpen')
+    }),
+    title: 'Hottest'
+  })
 
   state = {
     stories: [],

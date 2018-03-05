@@ -45,7 +45,7 @@ export default class StoryScreen extends Component<Props> {
   }: NavigationNavigatorProps<{}, NavigationState>) => {
     const params = navigation.state.params || {}
     return {
-      ...standardNavigationOptions,
+      ...standardNavigationOptions(),
       title: 'Story',
       headerRight: (
         <TouchableOpacity

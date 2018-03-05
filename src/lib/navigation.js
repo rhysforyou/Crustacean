@@ -1,7 +1,8 @@
 // @flow
 import { Platform } from 'react-native'
 
-export const standardNavigationOptions = {
+// eslint-disable-next-line no-unused-vars
+export const standardNavigationOptions = (showDrawer?: () => void) => ({
   headerStyle: {
     ...Platform.select({
       android: { backgroundColor: '#E53935' }
@@ -22,4 +23,4 @@ export const standardNavigationOptions = {
     ios: '#E53935',
     android: 'white'
   })
-}
+})
