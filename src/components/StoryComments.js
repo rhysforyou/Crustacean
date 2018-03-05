@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react'
-import { StyleSheet, View, FlatList, Platform } from 'react-native'
+import { StyleSheet, View, FlatList, Platform, Text } from 'react-native'
+import moment from 'moment'
 import HTML from 'react-native-render-html'
-import { itemDividerColor } from '../lib/colors'
+import { itemDividerColor, metaColor } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
 
 import type { ComponentType } from 'react'
@@ -23,18 +24,20 @@ export default class StoryScreen extends Component<Props> {
   renderItem = ({ item }: { item: Comment }) => (
     <View style={[styles.item, this.indentStyles(item)]}>
       <HTML html={item.comment} />
+      <Text style={styles.meta}>
+        {item.commenting_user.username}{' '}
+        {item.updated_at != item.created_at
+          ? `edited ${moment(item.updated_at).fromNow()}`
+          : moment(item.created_at).fromNow()}
+      </Text>
     </View>
   )
 
   indentStyles(comment: Comment) {
-    if (comment.indent_level === 1) {
-      return null
-    } else {
-      return {
-        marginStart: 8 * (comment.indent_level - 1),
-        borderLeftWidth: 2,
-        borderLeftColor: itemDividerColor
-      }
+    return {
+      marginStart: 8 * (comment.indent_level - 1),
+      borderLeftWidth: 4,
+      borderLeftColor: itemDividerColor
     }
   }
 
@@ -68,7 +71,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     paddingHorizontal: baseHorizontalPadding,
     maxWidth: maxContentWidth,
-    width: '100%',
     alignSelf: 'center'
   },
   divider: {
@@ -76,7 +78,10 @@ const styles = StyleSheet.create({
       ios: StyleSheet.hairlineWidth,
       android: 0
     }),
-    borderBottomColor: itemDividerColor,
-    marginStart: 8
+    borderBottomColor: itemDividerColor
+  },
+  meta: {
+    fontSize: 14,
+    color: metaColor
   }
 })
