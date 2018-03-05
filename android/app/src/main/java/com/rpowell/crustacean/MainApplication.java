@@ -1,4 +1,4 @@
-package com.crustacean;
+package com.rpowell.crustacean;
 
 import android.app.Application;
 

@@ -98,7 +98,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.crustacean"
+        applicationId "com.rpowell.crustacean"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
