@@ -1,10 +1,14 @@
+/* eslint react/display-name: off */
 // @flow
-import { Platform } from 'react-native'
+import React from 'react'
+import { Platform, Image } from 'react-native'
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation'
 import { accentColor } from '../lib/colors'
 import HottestStoriesScreen from './HottestStoriesScreen'
 import NewestStoriesScreen from './NewestStoriesScreen'
 import StoryScreen from './StoryScreen'
+import hottestIcon from '../../assets/icons/ic_hottest.png'
+import recentIcon from '../../assets/icons/ic_recent.png'
 
 import type { ComponentType } from 'react'
 
@@ -32,8 +36,32 @@ const RootNavigator = Platform.select({
 
 export default RootNavigator(
   {
-    Hottest: makeStackNavigator(HottestStoriesScreen),
-    Newest: makeStackNavigator(NewestStoriesScreen)
+    Hottest: {
+      screen: makeStackNavigator(HottestStoriesScreen),
+      navigationOptions: {
+        tabBarLabel: 'Hottest',
+        tabBarIcon: ({ tintColor }) => (
+          <Image source={hottestIcon} style={{ tintColor }} />
+        ),
+        drawerLabel: 'Hottest',
+        drawerIcon: ({ tintColor }) => (
+          <Image source={hottestIcon} style={{ tintColor }} />
+        )
+      }
+    },
+    Newest: {
+      screen: makeStackNavigator(NewestStoriesScreen),
+      navigationOptions: {
+        tabBarLabel: 'Recent',
+        tabBarIcon: ({ tintColor }) => (
+          <Image source={recentIcon} style={{ tintColor }} />
+        ),
+        drawerLabel: 'Recent',
+        drawerIcon: ({ tintColor }) => (
+          <Image source={recentIcon} style={{ tintColor }} />
+        )
+      }
+    }
   },
   {
     tabBarOptions: {

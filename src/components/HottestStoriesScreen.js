@@ -5,11 +5,10 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
 import { fetchHottestStories } from '../api'
 import StoryFeed from './StoryFeed'
-import hottestIcon from '../../assets/icons/ic_hottest.png'
 
 import type { StorySummary } from '../api'
 import type { NavigationNavigatorProps } from 'react-navigation'
@@ -31,13 +30,7 @@ export default class HottestStoriesScreen extends Component<Props, State> {
     ...standardNavigationOptions(() => {
       navigation.navigate('DrawerOpen')
     }),
-    title: 'Hottest',
-    tabBarIcon: ({ tintColor }) => (
-      <Image source={hottestIcon} style={{ tintColor }} />
-    ),
-    drawerIcon: ({ tintColor }) => (
-      <Image source={hottestIcon} style={{ tintColor }} />
-    )
+    title: 'Hottest'
   })
 
   state = {
