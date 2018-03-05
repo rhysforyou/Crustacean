@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Platform, Image } from 'react-native'
+import moment from 'moment'
 import {
   textColor,
   tagTextColor,
@@ -41,7 +42,8 @@ export default class StorySummary extends Component<Props> {
         source={{ uri: this.props.story.submitter_user.avatar_url }}
       />
       <Text style={styles.author}>
-        authored by {this.props.story.submitter_user.username}
+        authored by {this.props.story.submitter_user.username}{' '}
+        {moment(this.props.story.created_at).fromNow()}
       </Text>
     </View>
   )
