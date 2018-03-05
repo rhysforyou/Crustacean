@@ -5,10 +5,11 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
 import { fetchNewestStories } from '../api'
 import StoryFeed from './StoryFeed'
+import recentIcon from '../../assets/icons/ic_recent.png'
 
 import type { StorySummary } from '../api'
 import type { NavigationNavigatorProps } from 'react-navigation'
@@ -30,7 +31,13 @@ export default class NewestStoriesScreen extends Component<Props, State> {
     ...standardNavigationOptions(() => {
       navigation.navigate('DrawerOpen')
     }),
-    title: 'Hottest'
+    title: 'Recent',
+    tabBarIcon: ({ tintColor }) => (
+      <Image source={recentIcon} style={{ tintColor }} />
+    ),
+    drawerIcon: ({ tintColor }) => (
+      <Image source={recentIcon} style={{ tintColor }} />
+    )
   })
 
   state = {

@@ -1,6 +1,7 @@
 // @flow
 import { Platform } from 'react-native'
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation'
+import { accentColor } from '../lib/colors'
 import HottestStoriesScreen from './HottestStoriesScreen'
 import NewestStoriesScreen from './NewestStoriesScreen'
 import StoryScreen from './StoryScreen'
@@ -29,7 +30,17 @@ const RootNavigator = Platform.select({
   android: DrawerNavigator
 })
 
-export default RootNavigator({
-  Hottest: makeStackNavigator(HottestStoriesScreen),
-  Newest: makeStackNavigator(NewestStoriesScreen)
-})
+export default RootNavigator(
+  {
+    Hottest: makeStackNavigator(HottestStoriesScreen),
+    Newest: makeStackNavigator(NewestStoriesScreen)
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: accentColor
+    },
+    contentOptions: {
+      activeTintColor: accentColor
+    }
+  }
+)

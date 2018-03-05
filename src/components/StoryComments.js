@@ -34,44 +34,39 @@ export default class StoryScreen extends Component<Props> {
   )
 
   indentStyles(comment: Comment) {
-    return {
-      marginStart: 8 * (comment.indent_level - 1),
-      borderLeftWidth: 4,
-      borderLeftColor: itemDividerColor
+    if (comment.indent_level > 1) {
+      return {
+        marginStart: 8 * (comment.indent_level - 1),
+        borderLeftWidth: 4,
+        borderLeftColor: itemDividerColor
+      }
     }
+    return {}
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          keyExtractor={this.keyExtractor}
-          data={this.props.comments}
-          renderItem={this.renderItem}
-          ListHeaderComponent={this.props.header}
-          ItemSeparatorComponent={Divider}
-          style={styles.list}
-        />
-      </View>
+      <FlatList
+        keyExtractor={this.keyExtractor}
+        data={this.props.comments}
+        renderItem={this.renderItem}
+        ListHeaderComponent={this.props.header}
+        ItemSeparatorComponent={Divider}
+        style={styles.list}
+      />
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   list: {
-    alignSelf: 'stretch',
     paddingTop: Platform.select({ ios: 0, android: 8 })
   },
   item: {
     marginVertical: 8,
     paddingHorizontal: baseHorizontalPadding,
     maxWidth: maxContentWidth,
-    alignSelf: 'center'
+    alignSelf: 'stretch'
   },
   divider: {
     borderBottomWidth: Platform.select({
