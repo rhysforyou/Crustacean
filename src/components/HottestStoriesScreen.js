@@ -7,7 +7,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
-import { hottestStoriesFixture } from '../api/fixtures'
+import { fetchHottestStories } from '../api'
 import StoryFeed from './StoryFeed'
 
 import type { StorySummary } from '../api'
@@ -17,10 +17,39 @@ type NavigationState = {}
 
 type Props = {} & NavigationNavigatorProps<{}, NavigationState>
 
-export default class HottestStoriesScreen extends Component<Props> {
+type State = {
+  stories: StorySummary[],
+  isLoading: boolean,
+  loadingError: ?Error
+}
+
+export default class HottestStoriesScreen extends Component<Props, State> {
   static navigationOptions = {
     ...standardNavigationOptions,
     title: 'Hottest'
+  }
+
+  state = {
+    stories: [],
+    isLoading: false,
+    loadingError: null
+  }
+
+  componentDidMount() {
+    if (!this.state.loading) {
+      this.fetchStories()
+    }
+  }
+
+  fetchStories = () => {
+    this.setState({ isLoading: true, loadingError: null }, async () => {
+      try {
+        const stories = await fetchHottestStories()
+        this.setState({ stories, isLoading: false })
+      } catch (e) {
+        this.setState({ loadingError: e, isLoading: false })
+      }
+    })
   }
 
   handleSelectStory = (story: StorySummary) => {
@@ -34,8 +63,10 @@ export default class HottestStoriesScreen extends Component<Props> {
     return (
       <View style={styles.container}>
         <StoryFeed
-          stories={hottestStoriesFixture}
+          stories={this.state.stories}
+          isLoading={this.state.isLoading}
           onSelectStory={this.handleSelectStory}
+          onRefresh={this.fetchStories}
         />
       </View>
     )

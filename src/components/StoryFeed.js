@@ -11,7 +11,8 @@ import {
   Platform,
   TouchableHighlight,
   TouchableNativeFeedback,
-  View
+  View,
+  Text
 } from 'react-native'
 import { itemDividerColor, itemHighlightColor } from '../lib/colors'
 import StorySummary from './StorySummary'
@@ -22,7 +23,9 @@ const Divider = () => <View style={styles.divider} />
 
 type Props = {
   stories: StorySummaryType[],
-  onSelectStory: StorySummaryType => mixed
+  onSelectStory: StorySummaryType => mixed,
+  isLoading?: boolean,
+  onRefresh: () => void
 }
 
 export default class HomeScreen extends Component<Props> {
@@ -45,18 +48,32 @@ export default class HomeScreen extends Component<Props> {
     )
   }
 
+  renderEmpty = () => (
+    <View style={styles.placeholderContainer}>
+      <Text style={styles.placeholderText}>No Stories</Text>
+    </View>
+  )
+
   render() {
+    const { stories, isLoading, onRefresh } = this.props
+    const isRefreshing = stories.length > 0 && isLoading
+
     return (
       <FlatList
         style={styles.list}
-        data={this.props.stories}
+        data={stories}
         renderItem={this.renderItem}
         keyExtractor={this.keyExtractor}
         ItemSeparatorComponent={Divider}
+        ListEmptyComponent={this.renderEmpty}
+        onRefresh={onRefresh}
+        refreshing={isRefreshing}
       />
     )
   }
 }
+
+const placeholderTextColor = '#ccc'
 
 const styles = StyleSheet.create({
   list: {
@@ -71,5 +88,16 @@ const styles = StyleSheet.create({
     }),
     borderBottomColor: itemDividerColor,
     marginStart: 8
+  },
+  placeholderContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 128
+  },
+  placeholderText: {
+    fontSize: 36,
+    fontWeight: '200',
+    color: placeholderTextColor
   }
 })
