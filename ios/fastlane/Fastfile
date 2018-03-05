@@ -14,15 +14,16 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    match(type: "appstore")
-
     version = get_version_number
     build = increment_build_number(xcodeproj: "Crustacean.xcodeproj")
     semantic_version = "#{version}-build.#{build}"
 
+    match(type: "appstore")
     build_app(scheme: "Crustacean")
     upload_to_testflight
     add_git_tag(tag: semantic_version)
     push_git_tags
+
+    git_commit(message: ":rocket: Release #{semantic_version} to TestFlight", path: "*")
   end
 end
