@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import { StyleSheet, View, Share } from 'react-native'
+import { StyleSheet, View, Share, StatusBar } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
 import { fetchStory } from '../api'
 import StorySummary from './StorySummary'
@@ -73,12 +73,15 @@ export default class StoryScreen extends Component<Props, State> {
   )
 
   render() {
-    const { story } = this.state
+    const { story, isLoading } = this.state
     return (
       <View style={styles.container}>
+        <StatusBar networkActivityIndicatorVisible={isLoading} />
         <StoryComments
           header={this.renderHeader}
           comments={story ? story.comments : []}
+          onRefresh={this.fetchStory}
+          refreshing={story != null && isLoading}
         />
       </View>
     )

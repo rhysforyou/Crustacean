@@ -15,7 +15,9 @@ const baseHorizontalPadding = Platform.select({ android: 16, ios: 8 })
 
 type Props = {
   comments: Comment[],
-  header?: ComponentType<*>
+  header?: ComponentType<*>,
+  onRefresh?: () => void,
+  refreshing?: boolean
 }
 
 export default class StoryScreen extends Component<Props> {
@@ -53,6 +55,8 @@ export default class StoryScreen extends Component<Props> {
         ListHeaderComponent={this.props.header}
         ItemSeparatorComponent={Divider}
         style={styles.list}
+        onRefresh={this.props.onRefresh}
+        refreshing={this.props.refreshing}
       />
     )
   }

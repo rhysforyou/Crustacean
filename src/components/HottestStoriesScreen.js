@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
 import { fetchHottestStories } from '../api'
 import StoryFeed from './StoryFeed'
@@ -66,6 +66,7 @@ export default class HottestStoriesScreen extends Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar networkActivityIndicatorVisible={this.state.isLoading} />
         <StoryFeed
           stories={this.state.stories}
           isLoading={this.state.isLoading}
