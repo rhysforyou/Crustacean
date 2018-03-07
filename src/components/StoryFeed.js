@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
       android: 0
     }),
     borderBottomColor: itemDividerColor,
-    marginStart: 8
+    marginStart: 16
   },
   placeholderContainer: {
     flex: 1,

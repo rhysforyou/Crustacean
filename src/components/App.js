@@ -39,11 +39,11 @@ export default RootNavigator(
     Hottest: {
       screen: makeStackNavigator(HottestStoriesScreen),
       navigationOptions: {
-        tabBarLabel: 'Hottest',
+        tabBarLabel: 'Top Stories',
         tabBarIcon: ({ tintColor }) => (
           <Image source={hottestIcon} style={{ tintColor }} />
         ),
-        drawerLabel: 'Hottest',
+        drawerLabel: 'Top Stories',
         drawerIcon: ({ tintColor }) => (
           <Image source={hottestIcon} style={{ tintColor }} />
         )

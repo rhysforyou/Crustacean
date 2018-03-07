@@ -5,13 +5,12 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Platform, Image } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 import moment from 'moment'
 import {
   textColor,
   tagTextColor,
   tagBackgroundColor,
-  tagBorderColor,
   metaColor
 } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
@@ -61,8 +60,8 @@ export default class StorySummary extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Platform.select({ ios: 8, android: 16 }),
-    paddingVertical: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     flex: 1,
     flexDirection: 'column',
     maxWidth: maxContentWidth,
@@ -71,12 +70,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 17,
-    color: textColor
+    color: textColor,
+    fontWeight: '800',
+    marginBottom: 4
   },
   tagList: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 4
+    paddingTop: 4,
+    marginBottom: 4
   },
   tag: {
     paddingHorizontal: 4,
@@ -85,9 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: tagBackgroundColor,
     color: tagTextColor,
     fontSize: 14,
-    borderRadius: 3,
-    borderColor: tagBorderColor,
-    borderWidth: 1
+    borderRadius: 3
   },
   meta: {
     flex: 1,

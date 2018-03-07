@@ -30,7 +30,7 @@ export default class HottestStoriesScreen extends Component<Props, State> {
     ...standardNavigationOptions(() => {
       navigation.navigate('DrawerOpen')
     }),
-    title: 'Hottest'
+    title: 'Top Stories'
   })
 
   state = {
