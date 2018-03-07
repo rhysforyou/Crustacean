@@ -11,6 +11,7 @@ import {
   Platform,
   TouchableHighlight,
   TouchableNativeFeedback,
+  TouchableOpacity,
   View,
   Text,
   ActivityIndicator
@@ -29,6 +30,7 @@ const Divider = () => <View style={styles.divider} />
 type Props = {
   stories: StorySummaryType[],
   onSelectStory: StorySummaryType => mixed,
+  onSelectStoryComments: StorySummaryType => mixed,
   isLoading?: boolean,
   onRefresh: () => void
 }
@@ -48,11 +50,14 @@ export default class HomeScreen extends Component<Props> {
       >
         <View style={styles.item}>
           <StorySummary story={item} />
-          <View style={styles.commentCount}>
+          <TouchableOpacity
+            onPress={() => this.props.onSelectStoryComments(item)}
+            style={styles.commentCount}
+          >
             <View style={styles.commentCountInner}>
               <Text style={styles.commentCountText}>{item.comment_count}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </Touchable>
     )
