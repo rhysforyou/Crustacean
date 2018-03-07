@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     fontSize: 36,
-    fontWeight: '200',
+    fontWeight: '800',
     color: placeholderTextColor
   }
 })
