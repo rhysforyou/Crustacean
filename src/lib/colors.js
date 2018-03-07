@@ -10,6 +10,7 @@ export const tagBackgroundColor = '#fffcd7'
 export const tagBorderColor = '#d5d458'
 export const metaColor = '#888'
 export const itemHighlightColor = '#EAF4FF'
+export const commentBubbleBackgroundColor = '#eee'
 
 export const metaTagBackgroundColor = '#eee'
 export const communityTagBackgroundColor = '#f9ddde'

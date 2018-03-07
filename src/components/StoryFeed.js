@@ -15,7 +15,11 @@ import {
   Text,
   ActivityIndicator
 } from 'react-native'
-import { itemDividerColor, itemHighlightColor } from '../lib/colors'
+import {
+  itemDividerColor,
+  itemHighlightColor,
+  commentBubbleBackgroundColor
+} from '../lib/colors'
 import StorySummary from './StorySummary'
 
 import type { StorySummary as StorySummaryType } from '../api'
@@ -42,8 +46,13 @@ export default class HomeScreen extends Component<Props> {
         underlayColor={itemHighlightColor}
         onPress={() => this.props.onSelectStory(item)}
       >
-        <View>
+        <View style={styles.item}>
           <StorySummary story={item} />
+          <View style={styles.commentCount}>
+            <View style={styles.commentCountInner}>
+              <Text style={styles.commentCountText}>{item.comment_count}</Text>
+            </View>
+          </View>
         </View>
       </Touchable>
     )
@@ -87,6 +96,12 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.select({ ios: 44, android: 72 }),
     alignSelf: 'stretch'
   },
+  item: {
+    flex: 1,
+    flexDirection: 'row',
+    maxWidth: '100%',
+    alignItems: 'stretch'
+  },
   divider: {
     borderBottomWidth: Platform.select({
       ios: StyleSheet.hairlineWidth,
@@ -105,5 +120,20 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: '800',
     color: placeholderTextColor
+  },
+  commentCount: {
+    width: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16
+  },
+  commentCountInner: {
+    backgroundColor: commentBubbleBackgroundColor,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    borderRadius: 15
+  },
+  commentCountText: {
+    fontSize: 18
   }
 })
