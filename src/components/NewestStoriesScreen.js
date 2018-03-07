@@ -5,8 +5,10 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, StatusBar, Linking } from 'react-native'
+import { StyleSheet, View, StatusBar, Linking, Platform } from 'react-native'
+import SafariView from 'react-native-safari-view'
 import { standardNavigationOptions } from '../lib/navigation'
+import { accentColor } from '../lib/colors'
 import { fetchNewestStories } from '../api'
 import StoryFeed from './StoryFeed'
 
@@ -57,7 +59,13 @@ export default class NewestStoriesScreen extends Component<Props, State> {
   }
 
   handleSelectStory = (story: StorySummary) => {
-    if (Linking.canOpenURL(story.url)) {
+    if (Platform.OS === 'ios' && SafariView.isAvailable()) {
+      SafariView.show({
+        url: story.url,
+        tintColor: accentColor,
+        fromBottom: true
+      })
+    } else if (Linking.canOpenURL(story.url)) {
       Linking.openURL(story.url)
     } else {
       console.error(`Unable to open link: ${story.url}`)
