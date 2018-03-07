@@ -11,7 +11,10 @@ import {
   textColor,
   tagTextColor,
   tagBackgroundColor,
-  metaColor
+  metaColor,
+  metaTagBackgroundColor,
+  communityTagBackgroundColor,
+  mediaTagBackgroundColor
 } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
 
@@ -22,14 +25,34 @@ type Props = {
 }
 
 export default class StorySummary extends Component<Props> {
+  tagStyle(tag: string): { [key: string]: any } {
+    if (tag === 'meta') {
+      return {
+        backgroundColor: metaTagBackgroundColor
+      }
+    } else if (['ask', 'show'].indexOf(tag) !== -1) {
+      return {
+        backgroundColor: communityTagBackgroundColor
+      }
+    } else if (['video', 'audio', 'slides', 'pdf'].indexOf(tag) !== -1) {
+      return {
+        backgroundColor: mediaTagBackgroundColor
+      }
+    } else {
+      return {
+        backgroundColor: tagBackgroundColor
+      }
+    }
+  }
+
   renderItemTags = () =>
     this.props.story.tags != null &&
     this.props.story.tags.length > 0 && (
       <View style={styles.tagList}>
         {this.props.story.tags.map(tag => (
-          <Text key={tag} style={styles.tag}>
-            {tag}
-          </Text>
+          <View key={tag} style={[styles.tag, this.tagStyle(tag)]}>
+            <Text style={styles.tagText}>{tag}</Text>
+          </View>
         ))}
       </View>
     )
@@ -84,10 +107,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     paddingVertical: 1,
     marginEnd: 8,
-    backgroundColor: tagBackgroundColor,
+    borderRadius: 4
+  },
+  tagText: {
     color: tagTextColor,
-    fontSize: 14,
-    borderRadius: 3
+    fontSize: 14
   },
   meta: {
     flex: 1,
