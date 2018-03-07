@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, StatusBar, Linking, Platform } from 'react-native'
 import SafariView from 'react-native-safari-view'
 import { standardNavigationOptions } from '../lib/navigation'
-import { accentColor } from '../lib/colors'
+import { accentColor, accentDarkColor } from '../lib/colors'
 import { fetchNewestStories } from '../api'
 import StoryFeed from './StoryFeed'
 
@@ -82,7 +82,10 @@ export default class NewestStoriesScreen extends Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar networkActivityIndicatorVisible={this.state.isLoading} />
+        <StatusBar
+          backgroundColor={accentDarkColor}
+          networkActivityIndicatorVisible={this.state.isLoading}
+        />
         <StoryFeed
           stories={this.state.stories}
           isLoading={this.state.isLoading}

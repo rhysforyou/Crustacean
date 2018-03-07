@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Share, StatusBar } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
+import { accentDarkColor } from '../lib/colors'
 import { fetchStory } from '../api'
 import StorySummary from './StorySummary'
 import StoryComments from './StoryComments'
@@ -76,7 +77,10 @@ export default class StoryScreen extends Component<Props, State> {
     const { story, isLoading } = this.state
     return (
       <View style={styles.container}>
-        <StatusBar networkActivityIndicatorVisible={isLoading} />
+        <StatusBar
+          backgroundColor={accentDarkColor}
+          networkActivityIndicatorVisible={isLoading}
+        />
         <StoryComments
           header={this.renderHeader}
           comments={story ? story.comments : []}
