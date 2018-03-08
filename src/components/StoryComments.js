@@ -1,6 +1,14 @@
 // @flow
 import React, { Component } from 'react'
-import { StyleSheet, View, FlatList, Platform, Text, Image } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Platform,
+  Text,
+  Image,
+  SafeAreaView
+} from 'react-native'
 import moment from 'moment'
 import HTML from 'react-native-render-html'
 import { itemDividerColor, metaColor } from '../lib/colors'
@@ -37,21 +45,23 @@ export default class StoryScreen extends Component<Props> {
   keyExtractor = (item: Comment) => item.short_id
 
   renderItem = ({ item }: { item: Comment }) => (
-    <View style={[styles.item, this.indentStyles(item)]}>
-      <View style={styles.metaContainer}>
-        <Image
-          source={{ uri: item.commenting_user.avatar_url }}
-          style={styles.avatar}
-        />
-        <Text style={styles.meta}>
-          {item.commenting_user.username}{' '}
-          {item.updated_at != item.created_at
-            ? `edited ${moment(item.updated_at).fromNow()}`
-            : moment(item.created_at).fromNow()}
-        </Text>
+    <SafeAreaView>
+      <View style={[styles.item, this.indentStyles(item)]}>
+        <View style={styles.metaContainer}>
+          <Image
+            source={{ uri: item.commenting_user.avatar_url }}
+            style={styles.avatar}
+          />
+          <Text style={styles.meta}>
+            {item.commenting_user.username}{' '}
+            {item.updated_at != item.created_at
+              ? `edited ${moment(item.updated_at).fromNow()}`
+              : moment(item.created_at).fromNow()}
+          </Text>
+        </View>
+        <HTML html={item.comment} baseFontSize={20} />
       </View>
-      <HTML html={item.comment} baseFontSize={20} />
-    </View>
+    </SafeAreaView>
   )
 
   indentStyles(comment: Comment) {
