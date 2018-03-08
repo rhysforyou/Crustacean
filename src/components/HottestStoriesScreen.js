@@ -59,6 +59,11 @@ export default class HottestStoriesScreen extends Component<Props, State> {
   }
 
   handleSelectStory = (story: StorySummary) => {
+    if (story.url == null || story.url.length === 0) {
+      this.handleSelectStoryComments(story)
+      return
+    }
+
     if (Platform.OS === 'ios' && SafariView.isAvailable()) {
       SafariView.show({
         url: story.url,
