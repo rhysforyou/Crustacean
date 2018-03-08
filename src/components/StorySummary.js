@@ -18,6 +18,7 @@ import {
   mediaTagBackgroundColor
 } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
+import openLink from '../lib/openLink'
 
 import type { StorySummary as StorySummaryType } from '../api'
 
@@ -76,7 +77,12 @@ export default class StorySummary extends Component<Props> {
     </View>
   )
 
-  renderStoryDescription = () => <HTML html={this.props.story.description} />
+  renderStoryDescription = () => (
+    <HTML
+      html={this.props.story.description}
+      onLinkPress={(event, href) => openLink(href)}
+    />
+  )
 
   render() {
     return (
