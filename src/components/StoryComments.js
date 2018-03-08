@@ -5,6 +5,7 @@ import moment from 'moment'
 import HTML from 'react-native-render-html'
 import { itemDividerColor, metaColor } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
+import openLink from '../lib/openLink'
 import CentredSafeAreaView from './CentredSafeAreaView'
 
 import type { ComponentType } from 'react'
@@ -52,7 +53,11 @@ export default class StoryScreen extends Component<Props> {
               : moment(item.created_at).fromNow()}
           </Text>
         </View>
-        <HTML html={item.comment} baseFontSize={20} />
+        <HTML
+          html={item.comment}
+          baseFontSize={20}
+          onLinkPress={(event, href) => openLink(href)}
+        />
       </View>
     </CentredSafeAreaView>
   )
