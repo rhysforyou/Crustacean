@@ -70,6 +70,7 @@ export default class StoryScreen extends Component<Props, State> {
   renderHeader = () => (
     <SafeAreaView>
       <StorySummary
+        withDescription
         story={this.state.story || this.props.navigation.state.params.story}
       />
     </SafeAreaView>

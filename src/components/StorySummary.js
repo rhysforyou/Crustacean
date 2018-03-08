@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
+import HTML from 'react-native-render-html'
 import moment from 'moment'
 import {
   textColor,
@@ -21,10 +22,15 @@ import { maxContentWidth } from '../lib/metrics'
 import type { StorySummary as StorySummaryType } from '../api'
 
 type Props = {
-  story: StorySummaryType
+  story: StorySummaryType,
+  withDescription: boolean
 }
 
 export default class StorySummary extends Component<Props> {
+  static defaultProps = {
+    withDescription: false
+  }
+
   tagStyle(tag: string): { [key: string]: any } {
     if (tag === 'meta') {
       return {
@@ -45,7 +51,7 @@ export default class StorySummary extends Component<Props> {
     }
   }
 
-  renderItemTags = () =>
+  renderStoryTags = () =>
     this.props.story.tags != null &&
     this.props.story.tags.length > 0 && (
       <View style={styles.tagList}>
@@ -57,7 +63,7 @@ export default class StorySummary extends Component<Props> {
       </View>
     )
 
-  renderItemMeta = () => (
+  renderStoryMeta = () => (
     <View style={styles.meta}>
       <Image
         style={styles.avatar}
@@ -70,12 +76,18 @@ export default class StorySummary extends Component<Props> {
     </View>
   )
 
+  renderStoryDescription = () => <HTML html={this.props.story.description} />
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{this.props.story.title}</Text>
-        {this.renderItemTags()}
-        {this.renderItemMeta()}
+        {this.renderStoryTags()}
+        {this.renderStoryMeta()}
+        {this.props.withDescription &&
+          this.props.story.description != null &&
+          this.props.story.description.length > 0 &&
+          this.renderStoryDescription()}
       </View>
     )
   }
