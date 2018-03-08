@@ -1,18 +1,11 @@
 // @flow
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  Platform,
-  Text,
-  Image,
-  SafeAreaView
-} from 'react-native'
+import { StyleSheet, View, FlatList, Platform, Text, Image } from 'react-native'
 import moment from 'moment'
 import HTML from 'react-native-render-html'
 import { itemDividerColor, metaColor } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
+import CentredSafeAreaView from './CentredSafeAreaView'
 
 import type { ComponentType } from 'react'
 import type { Comment } from '../api'
@@ -45,7 +38,7 @@ export default class StoryScreen extends Component<Props> {
   keyExtractor = (item: Comment) => item.short_id
 
   renderItem = ({ item }: { item: Comment }) => (
-    <SafeAreaView>
+    <CentredSafeAreaView>
       <View style={[styles.item, this.indentStyles(item)]}>
         <View style={styles.metaContainer}>
           <Image
@@ -61,7 +54,7 @@ export default class StoryScreen extends Component<Props> {
         </View>
         <HTML html={item.comment} baseFontSize={20} />
       </View>
-    </SafeAreaView>
+    </CentredSafeAreaView>
   )
 
   indentStyles(comment: Comment) {

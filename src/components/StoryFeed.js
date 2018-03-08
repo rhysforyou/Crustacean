@@ -14,14 +14,14 @@ import {
   TouchableOpacity,
   View,
   Text,
-  ActivityIndicator,
-  SafeAreaView
+  ActivityIndicator
 } from 'react-native'
 import {
   itemDividerColor,
   itemHighlightColor,
   commentBubbleBackgroundColor
 } from '../lib/colors'
+import CentredSafeAreaView from './CentredSafeAreaView'
 import StorySummary from './StorySummary'
 
 import type { StorySummary as StorySummaryType } from '../api'
@@ -49,7 +49,7 @@ export default class HomeScreen extends Component<Props> {
         underlayColor={itemHighlightColor}
         onPress={() => this.props.onSelectStory(item)}
       >
-        <SafeAreaView>
+        <CentredSafeAreaView>
           <View style={styles.item}>
             <StorySummary story={item} />
             <TouchableOpacity
@@ -63,7 +63,7 @@ export default class HomeScreen extends Component<Props> {
               </View>
             </TouchableOpacity>
           </View>
-        </SafeAreaView>
+        </CentredSafeAreaView>
       </Touchable>
     )
   }
