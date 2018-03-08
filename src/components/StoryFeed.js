@@ -14,7 +14,8 @@ import {
   TouchableOpacity,
   View,
   Text,
-  ActivityIndicator
+  ActivityIndicator,
+  SafeAreaView
 } from 'react-native'
 import {
   itemDividerColor,
@@ -48,17 +49,21 @@ export default class HomeScreen extends Component<Props> {
         underlayColor={itemHighlightColor}
         onPress={() => this.props.onSelectStory(item)}
       >
-        <View style={styles.item}>
-          <StorySummary story={item} />
-          <TouchableOpacity
-            onPress={() => this.props.onSelectStoryComments(item)}
-            style={styles.commentCount}
-          >
-            <View style={styles.commentCountInner}>
-              <Text style={styles.commentCountText}>{item.comment_count}</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <SafeAreaView>
+          <View style={styles.item}>
+            <StorySummary story={item} />
+            <TouchableOpacity
+              onPress={() => this.props.onSelectStoryComments(item)}
+              style={styles.commentCount}
+            >
+              <View style={styles.commentCountInner}>
+                <Text style={styles.commentCountText}>
+                  {item.comment_count}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
       </Touchable>
     )
   }
