@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import { StyleSheet, View, Share, StatusBar } from 'react-native'
+import { StyleSheet, View, Share, StatusBar, SafeAreaView } from 'react-native'
 import { standardNavigationOptions } from '../lib/navigation'
 import { accentDarkColor } from '../lib/colors'
 import { fetchStory } from '../api'
@@ -68,9 +68,11 @@ export default class StoryScreen extends Component<Props, State> {
   }
 
   renderHeader = () => (
-    <StorySummary
-      story={this.state.story || this.props.navigation.state.params.story}
-    />
+    <SafeAreaView>
+      <StorySummary
+        story={this.state.story || this.props.navigation.state.params.story}
+      />
+    </SafeAreaView>
   )
 
   render() {
