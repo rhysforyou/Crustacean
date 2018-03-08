@@ -5,9 +5,9 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, View, StatusBar, Linking, Platform } from 'react-native'
-import SafariView from 'react-native-safari-view'
-import { accentColor, accentDarkColor } from '../lib/colors'
+import { StyleSheet, View, StatusBar } from 'react-native'
+import { accentDarkColor } from '../lib/colors'
+import openLink from '../lib/openLink'
 import StoryFeed from './StoryFeed'
 
 import type { StorySummary } from '../api'
@@ -56,17 +56,7 @@ export default class StoryFeedScreen extends Component<Props, State> {
       return
     }
 
-    if (Platform.OS === 'ios' && SafariView.isAvailable()) {
-      SafariView.show({
-        url: story.url,
-        tintColor: accentColor,
-        fromBottom: true
-      })
-    } else if (Linking.canOpenURL(story.url)) {
-      Linking.openURL(story.url)
-    } else {
-      console.error(`Unable to open link: ${story.url}`)
-    }
+    openLink(story.url)
   }
 
   handleSelectStoryComments = (story: StorySummary) => {
