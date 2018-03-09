@@ -1,9 +1,4 @@
-/**
- * Component responsible for rendering the 'home' screen
- *
- * @flow
- */
-
+// @flow
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import HTML from 'react-native-render-html'
@@ -19,6 +14,7 @@ import {
 } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
 import openLink from '../lib/openLink'
+import votesIcom from '../../assets/icons/ic_votes.png'
 
 import type { StorySummary as StorySummaryType } from '../api'
 
@@ -74,6 +70,8 @@ export default class StorySummary extends Component<Props> {
         authored by {this.props.story.submitter_user.username}{' '}
         {moment(this.props.story.created_at).fromNow()}
       </Text>
+      <Image style={styles.scoreIcon} source={votesIcom} />
+      <Text style={styles.score}>{this.props.story.score}</Text>
     </View>
   )
 
@@ -134,6 +132,8 @@ const styles = StyleSheet.create({
   meta: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     paddingTop: 8
   },
   avatar: {
@@ -143,6 +143,14 @@ const styles = StyleSheet.create({
     marginEnd: 4
   },
   author: {
+    fontSize: 14,
+    color: metaColor
+  },
+  scoreIcon: {
+    marginStart: 8,
+    marginEnd: 2
+  },
+  score: {
     fontSize: 14,
     color: metaColor
   }
