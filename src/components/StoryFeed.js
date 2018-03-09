@@ -135,7 +135,8 @@ const styles = StyleSheet.create({
     width: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16
+    padding: 16,
+    fontSize: 14
   },
   commentCountInner: {
     backgroundColor: commentBubbleBackgroundColor,
