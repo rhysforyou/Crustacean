@@ -14,6 +14,7 @@ import {
 } from '../lib/colors'
 import { maxContentWidth } from '../lib/metrics'
 import openLink from '../lib/openLink'
+import timeIcom from '../../assets/icons/ic_time.png'
 import votesIcom from '../../assets/icons/ic_votes.png'
 
 import type { StorySummary as StorySummaryType } from '../api'
@@ -67,8 +68,11 @@ export default class StorySummary extends Component<Props> {
         source={{ uri: this.props.story.submitter_user.avatar_url }}
       />
       <Text style={styles.author}>
-        authored by {this.props.story.submitter_user.username}{' '}
-        {moment(this.props.story.created_at).fromNow()}
+        {this.props.story.submitter_user.username}
+      </Text>
+      <Image style={styles.dateIcon} source={timeIcom} />
+      <Text style={styles.date}>
+        {moment(this.props.story.created_at).fromNow(true)}
       </Text>
       <Image style={styles.scoreIcon} source={votesIcom} />
       <Text style={styles.score}>{this.props.story.score}</Text>
@@ -143,6 +147,14 @@ const styles = StyleSheet.create({
     marginEnd: 4
   },
   author: {
+    fontSize: 14,
+    color: metaColor
+  },
+  dateIcon: {
+    marginStart: 8,
+    marginEnd: 2
+  },
+  date: {
     fontSize: 14,
     color: metaColor
   },
