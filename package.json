@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
-    "babel-jest": "22.4.1",
+    "babel-jest": "^22.4.1",
     "babel-preset-react-native": "4.0.0",
     "eslint": "^4.18.2",
     "eslint-config": "^0.3.0",
@@ -33,7 +33,16 @@
     "react-test-renderer": "^16.3.0-alpha.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileMock.js"
+    },
+    "collectCoverage": true,
+    "coverageDirectory": "__coverage__",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|native-base|react-navigation|react-native-fabric)"
+    ]
   },
   "prettier": {
     "semi": false,
