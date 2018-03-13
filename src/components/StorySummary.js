@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 17,
+    lineHeight: 20,
     color: textColor,
     fontWeight: '800',
     marginBottom: 4

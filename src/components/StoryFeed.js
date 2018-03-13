@@ -129,10 +129,12 @@ const styles = StyleSheet.create({
     color: placeholderTextColor
   },
   commentCount: {
-    width: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
+    paddingTop: 16,
+    paddingRight: 16,
+    paddingBottom: 16,
+    paddingLeft: 0,
     fontSize: 14
   }
 })
