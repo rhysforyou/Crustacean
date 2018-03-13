@@ -16,13 +16,10 @@ import {
   Text,
   ActivityIndicator
 } from 'react-native'
-import {
-  itemDividerColor,
-  itemHighlightColor,
-  commentBubbleBackgroundColor
-} from '../lib/colors'
+import { itemDividerColor, itemHighlightColor } from '../lib/colors'
 import CentredSafeAreaView from './CentredSafeAreaView'
 import StorySummary from './StorySummary'
+import CommentBubble from './CommentBubble'
 
 import type { StorySummary as StorySummaryType } from '../api'
 
@@ -56,11 +53,11 @@ export default class HomeScreen extends Component<Props> {
               onPress={() => this.props.onSelectStoryComments(item)}
               style={styles.commentCount}
             >
-              <View style={styles.commentCountInner}>
-                <Text style={styles.commentCountText}>
-                  {item.comment_count}
-                </Text>
-              </View>
+              <CommentBubble
+                width={35}
+                height={30}
+                count={item.comment_count}
+              />
             </TouchableOpacity>
           </View>
         </CentredSafeAreaView>
@@ -137,14 +134,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     fontSize: 14
-  },
-  commentCountInner: {
-    backgroundColor: commentBubbleBackgroundColor,
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 15
-  },
-  commentCountText: {
-    fontSize: 18
   }
 })
