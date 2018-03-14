@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react'
-import { ART, Text, View, StyleSheet } from 'react-native'
+import { ART, Text, View, StyleSheet, Platform } from 'react-native'
 import { accentColor } from '../lib/colors'
 
 const { Shape, Surface } = ART
@@ -8,17 +8,21 @@ const { Shape, Surface } = ART
 type Props = {
   width: number,
   height: number,
+  fillColor: ?string,
   strokeWidth: number,
-  strokeColor: string,
+  strokeColor: ?string,
+  textColor: ?string,
   tickSize: number,
   count: number
 }
 
 export default class CommentBubble extends PureComponent<Props> {
   static defaultProps = {
-    strokeWidth: 1,
+    fillColor: Platform.select({ ios: null, android: accentColor }),
+    strokeWidth: Platform.select({ ios: 1, android: 0 }),
     strokeColor: accentColor,
-    tickSize: 8,
+    textColor: Platform.select({ ios: accentColor, android: 'white' }),
+    tickSize: 6,
     count: 0
   }
 
@@ -32,29 +36,41 @@ export default class CommentBubble extends PureComponent<Props> {
     return `
       M ${radius + inset},${inset}
       L ${width - radius - inset},${inset}
-      A ${radius - strokeWidth} ${radius - strokeWidth} 0 0 1
-        ${width - radius - inset} ${bubbleHeight - inset}
-      L ${width - radius - inset},${height - inset}
-      L ${width - radius - tickSize - inset},${bubbleHeight - inset}
+      a ${radius - strokeWidth} ${radius - strokeWidth} 0 0 1
+        0,${bubbleHeight - strokeWidth}
+      l 0,${tickSize}
+      l ${-tickSize},${-tickSize}
       L ${radius + inset},${bubbleHeight - inset}
-      A ${radius - strokeWidth} ${radius - strokeWidth} 0 0 1
-        ${radius + inset} ${inset} ${inset},${radius}
+      a ${radius - strokeWidth} ${radius - strokeWidth} 0 0 1
+        0,${strokeWidth - bubbleHeight}
       Z
     `
   }
 
   render() {
+    const {
+      width,
+      height,
+      fillColor,
+      strokeColor,
+      strokeWidth,
+      tickSize,
+      textColor,
+      count
+    } = this.props
+
     return (
       <View>
-        <Surface width={this.props.width} height={this.props.height}>
+        <Surface width={width} height={height}>
           <Shape
-            stroke={this.props.strokeColor}
-            strokeWidth={this.props.strokeWidth}
+            fill={fillColor}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
             d={this.commentBubblePath()}
           />
         </Surface>
-        <View style={[styles.textContainer, { bottom: this.props.tickSize }]}>
-          <Text style={styles.text}>{this.props.count}</Text>
+        <View style={[styles.textContainer, { bottom: tickSize }]}>
+          <Text style={[styles.text, { color: textColor }]}>{count}</Text>
         </View>
       </View>
     )
@@ -74,7 +90,7 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    color: accentColor,
-    fontSize: 14
+    fontSize: 14,
+    fontWeight: Platform.select({ ios: '400', android: '800' })
   }
 })
