@@ -1,0 +1,15 @@
+---
+before_script:
+  - yarn
+
+jest:
+  image: node
+  script: yarn test
+
+flow:
+  image: node
+  script: yarn flow
+
+eslint:
+  image: node
+  script: yarn lint
