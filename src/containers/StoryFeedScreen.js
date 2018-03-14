@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, StatusBar } from 'react-native'
 import { accentDarkColor } from '../lib/colors'
 import openLink from '../lib/openLink'
-import StoryFeed from './StoryFeed'
+import StoryFeed from '../components/StoryFeed'
 
 import type { StorySummary } from '../api'
 import type { NavigationScreenProp } from 'react-navigation'
