@@ -69,7 +69,7 @@ export default class StoryScreen extends Component<Props> {
           (comment.indent_level - 2) % commentDividerColors.length
         ]
       return {
-        marginStart: baseHorizontalPadding + 8 * (comment.indent_level - 1),
+        marginStart: baseHorizontalPadding + 8 * (comment.indent_level - 2),
         borderLeftWidth: 2,
         borderLeftColor: borderColor
       }
